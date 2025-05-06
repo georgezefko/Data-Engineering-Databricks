@@ -1,0 +1,1 @@
+databricks auth login --profile data-engineering-databricks

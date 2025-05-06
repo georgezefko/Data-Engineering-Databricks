@@ -1,0 +1,31 @@
+{
+    "name": "Data Engineering with Databricks",
+
+    "dockerFile": "Dockerfile",
+    "context": "..",
+    "build": {
+        "args":{
+            "LOCAL_USER": "${localEnv:USER}"
+        }
+    },
+    "runArgs":["--network", "host"],
+    "forwardPorts": [8020],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.debugpy",
+                "natqe.reload",
+                "databricks.databricks",
+                "tamasfe.even-better-toml",
+                "bierner.markdown-mermaid",
+                "paiqo.databricks-vscode",
+                "ms-python.pylint"
+            ],
+            "settings": {
+                "pylint.args":["--rcfile=pylintrc"],
+                "terminal.integrated.defaultProfile.linux": "bash"
+            }
+        },
+        "postStartCommand": "sh .devcontainer/post_create.sh"
+    }
+}
