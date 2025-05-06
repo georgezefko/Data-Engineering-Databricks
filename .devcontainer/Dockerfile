@@ -1,42 +1,54 @@
+# syntax=docker/dockerfile:1
 FROM mcr.microsoft.com/devcontainers/base:jammy
 
-ARG LOCAL_USER
+################################################################################
+# Build‑time args                                                               #
+################################################################################
+ARG LOCAL_USER=vscode
+ENV LOCAL_USER=${LOCAL_USER}
 
-RUN apt-get update \
-    && apt-get install -y \
-        git \
-        python3 \
-        python3-pip \
-        python3-setuptools \
-        curl \
-        pipx \
-        build-essential \
-        zip \
-    && rm -rf /var/lib/apt/lists/*
+################################################################################
+# System packages (as root)                                                     #
+################################################################################
+USER root
+RUN apt-get update && apt-get install -y \
+    git python3 python3-pip python3-setuptools \
+    curl pipx build-essential zip \
+ && rm -rf /var/lib/apt/lists/*
 
-# Create working directory
+################################################################################
+# Switch back to the unprivileged vscode user                                   #
+################################################################################
+USER vscode
+ENV PATH="/home/vscode/.local/bin:${PATH}" 
 WORKDIR /app
-COPY . /app
 
-# Fix for pusing to the repo
+################################################################################
+# Copy only what each step needs (better cache)                                 #
+################################################################################
+COPY --chown=vscode:vscode requirements.txt /tmp/requirements.txt
+RUN pip install --user -r /tmp/requirements.txt
 
-RUN git config --global crednetial.useHttpPath true
-RUN git config --global user.email "${LOCAL_USER}}@gmail.com"
+COPY --chown=vscode:vscode . /app
 
-# Setup Datbricks config file path
-ENV DATABRICKS_CONFIG_FILE="app/.databrickscfg"
+################################################################################
+# Git + pre‑commit                                                              #
+################################################################################
+RUN git config --global credential.useHttpPath true \
+ && git config --global user.email "${LOCAL_USER}@gmail.com" \
+ && git config --global user.name  "${LOCAL_USER}" \
+ && git init \
+ && pre-commit install
 
-# create alias for databricks asset bundle
+################################################################################
+# Databricks CLI                                                                #
+################################################################################
+ENV DATABRICKS_CONFIG_FILE="/app/.databrickscfg"
+RUN curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sudo sh
 
-RUN echo "alias dab = 'databricks bundle'" >>  ~/.bashrc && \
-    echo "alias dab = 'databricks bundle'" >>  ~/.profile && \
-    echo "alias dab = 'databricks bundle'" >> /etc/bash.bashcr && \
-    echo '#!/bin/bash\ndatabricks bundle "$@"' > /usr/local/bin/dab && \
-    chmod +x /usr/local/bin/dab
-
-# Download databricks CLI
-RUN curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
-
-# Install python dependencies
-RUN pip install -r requirements.txt
-RUN git init && pre-commit install
+################################################################################
+# Convenience alias                                                             #
+################################################################################
+RUN echo "alias dab='databricks bundle'" >> ~/.bashrc \
+ && echo '#!/bin/bash\ndatabricks bundle "$@"' | sudo tee /usr/local/bin/dab >/dev/null \
+ && sudo chmod +x /usr/local/bin/dab

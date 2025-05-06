@@ -5,7 +5,7 @@
     "context": "..",
     "build": {
         "args":{
-            "LOCAL_USER": "${localEnv: USERNAME}"
+            "LOCAL_USER": "${localEnv:USER}"
         }
     },
     "runArgs":["--network", "host"],
@@ -22,9 +22,10 @@
                 "ms-python.pylint"
             ],
             "settings": {
-                "pylint.args":["--rcfile=pylintrc"]
+                "pylint.args":["--rcfile=pylintrc"],
+                "terminal.integrated.defaultProfile.linux": "bash"
             }
         },
-        "postStartCommand": "sh post_create.sh"
+        "postStartCommand": "sh .devcontainer/post_create.sh"
     }
 }
