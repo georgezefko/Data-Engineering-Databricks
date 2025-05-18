@@ -1,0 +1,35 @@
+name: 'Release'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  semantic-release:
+    name: 'Tag & Release'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Needed to create Git tags/releases
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install semantic-release and plugins
+        run: |
+          npm install --global semantic-release \
+            @semantic-release/changelog \
+            @semantic-release/git \
+            @semantic-release/exec \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator
+
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: semantic-release
