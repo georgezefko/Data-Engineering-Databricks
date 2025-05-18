@@ -1,0 +1,69 @@
+# trigger:
+#   branches:
+#     include:
+#       - main
+
+# pool:
+#   vmImage: 'ubuntu-latest'
+
+# variables:
+#   NODE_VERSION: 20
+#   PYTHON_VERSION: '3.10'
+
+# steps:
+#   - checkout: self
+#     persistCredentials: true  # Required for semantic-release to push tags
+
+#   - task: UsePythonVersion@0
+#     inputs:
+#       versionSpec: '$(PYTHON_VERSION)'
+#     displayName: 'Set up Python'
+
+#   - task: NodeTool@0
+#     inputs:
+#       versionSpec: '$(NODE_VERSION)'
+#     displayName: 'Set up Node.js'
+
+#   - script: |
+#       pip install databricks-cli
+#       npm install --global semantic-release \
+#         @semantic-release/changelog \
+#         @semantic-release/git \
+#         @semantic-release/exec \
+#         @semantic-release/commit-analyzer \
+#         @semantic-release/release-notes-generator
+#     displayName: 'Install Dependencies'
+
+#   - script: |
+#       git config user.name "azure-pipelines-bot"
+#       git config user.email "ci@yourdomain.com"
+#     displayName: 'Set Git Identity'
+
+#   - script: |
+#       databricks configure --token --host "$(DATABRICKS_HOST)" <<< "$(DATABRICKS_TOKEN)"
+#     displayName: 'Authenticate Databricks CLI'
+
+#   - script: |
+#       databricks bundle validate --profile ci-cd
+#     displayName: 'Validate Databricks Bundle'
+
+#   - script: |
+#       databricks bundle deploy --profile ci-cd
+#     displayName: 'Deploy Databricks Bundle'
+
+#   - script: |
+#       pytest tests/
+#     displayName: 'Run Tests'
+
+#   - script: |
+#       semantic-release
+#     env:
+#       GITHUB_TOKEN: $(System.AccessToken)
+#     displayName: 'Run Semantic Release'
+
+#   - script: |
+#       RELEASE=$(if [ -f /tmp/version ]; then cat /tmp/version | tr -d '[:space:]'; else echo $(Build.BuildId); fi)
+#       echo "##vso[task.setvariable variable=release;isOutput=true]$RELEASE"
+#       echo "Release version: $RELEASE"
+#     name: setRelease
+#     displayName: 'Extract Version'
