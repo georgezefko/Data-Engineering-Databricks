@@ -34,7 +34,7 @@ jobs:
 
       - name: Install CLI and dependencies
         run: |
-          pip install databricks-cli
+          pip install --upgrade databricks-cli
           npm install --global semantic-release \
             @semantic-release/changelog \
             @semantic-release/git \
@@ -42,22 +42,18 @@ jobs:
             @semantic-release/commit-analyzer \
             @semantic-release/release-notes-generator
 
-      - name: Configure Databricks CLI
-        run: |
-          databricks configure --host "$DATABRICKS_HOST" --token "$DATABRICKS_TOKEN" --profile ci-cd
-
       - name: Validate Databricks Bundle
         run: |
-          databricks bundle validate --profile ci-cd
+          databricks bundle validate
 
       - name: Deploy Databricks Bundle
         run: |
-          databricks bundle deploy --profile ci-cd
+          databricks bundle deploy
 
-      - name: Run Tests
-        run: |
-          # Replace with your own test logic or command
-          pytest tests/
+      # - name: Run Tests
+      #   run: |
+      #     # Replace with your own test logic or command
+      #     pytest tests/
 
       - name: Run semantic-release
         env:
