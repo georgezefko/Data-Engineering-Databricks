@@ -9,22 +9,55 @@ on:
       - main
 
 jobs:
-  semantic-release:
+  build-deploy-release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  # Required for semantic-release to push tags
+
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install semantic-release and plugins
+      - name: Install CLI and dependencies
         run: |
-          npm install --global semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/exec @semantic-release/commit-analyzer @semantic-release/release-notes-generator
+          pip install databricks-cli
+          npm install --global semantic-release \
+            @semantic-release/changelog \
+            @semantic-release/git \
+            @semantic-release/exec \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator
+
+      - name: Configure Databricks CLI
+        run: |
+          databricks configure --host "$DATABRICKS_HOST" --token "$DATABRICKS_TOKEN" --profile ci-cd
+
+      - name: Validate Databricks Bundle
+        run: |
+          databricks bundle validate --profile ci-cd
+
+      - name: Deploy Databricks Bundle
+        run: |
+          databricks bundle deploy --profile ci-cd
+
+      - name: Run Tests
+        run: |
+          # Replace with your own test logic or command
+          pytest tests/
 
       - name: Run semantic-release
         env:
