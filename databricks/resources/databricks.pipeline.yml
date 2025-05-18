@@ -1,0 +1,13 @@
+# The main pipeline for databricks
+resources:
+  pipelines:
+    databricks_pipeline:
+      name: databricks_pipeline
+      catalog: development
+      schema: databricks_${bundle.target}
+      libraries:
+        - notebook:
+            path: ../src/dlt_pipeline.ipynb
+
+      configuration:
+        bundle.sourcePath: ${workspace.file_path}/src
