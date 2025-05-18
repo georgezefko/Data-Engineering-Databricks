@@ -20,7 +20,7 @@ jobs:
 
       - name: Validate bundle
         run: databricks bundle validate
-        working-directory: ./Databricks
+        working-directory: databricks
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
@@ -37,7 +37,7 @@ jobs:
 
       - name: Deploy bundle
         run: databricks bundle deploy
-        working-directory: ./Databricks
+        working-directory: databricks
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
