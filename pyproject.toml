@@ -1,10 +1,28 @@
+[build-system]          # ← add this if uv didn't create it
+requires = ["uv>=0.7"]
+build-backend = "uv.build"
+
 [project]
-name = "data-engineering-databricks"
-version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
+name            = "data-engineering-databricks"
+version         = "0.1.0"
+description     = "Local Databricks engineering workspace"
+readme          = "README.md"
 requires-python = ">=3.10"
+
 dependencies = [
-    "databricks-sdk>=0.49.0",
-    "pre-commit==4.2.0",
+    "databricks-sdk>=0.49",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=4.2",
+    "black>=25.1",
+    "ruff>=0.11",
+]
+
+# (optional) tool configs
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
