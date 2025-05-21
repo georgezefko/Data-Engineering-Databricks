@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/georgezefko/Data-Engineering-Databricks/compare/v1.1.0...v1.1.1) (2025-05-21)
+
+
+### Bug Fixes
+
+* **devcontainer:** changed post create command ([dd7e561](https://github.com/georgezefko/Data-Engineering-Databricks/commit/dd7e561d9206aa7c58c675cb1d94e148163a58ab))
+
 # [1.1.0](https://github.com/georgezefko/Data-Engineering-Databricks/compare/v1.0.0...v1.1.0) (2025-05-18)
 
 
