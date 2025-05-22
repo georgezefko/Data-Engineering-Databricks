@@ -66,7 +66,7 @@
 #  && sudo chmod +x /usr/local/bin/dab
 
 
- FROM mcr.microsoft.com/devcontainers/base:jammy
+FROM mcr.microsoft.com/devcontainers/base:jammy
 
 # Use to set the git config
 ARG LOCAL_USER
@@ -110,9 +110,9 @@ COPY . .
 RUN uv pip install -e ".[dev]"
 
 
-RUN git config --global credential.useHttpPath true \
- && git config --global user.email "${LOCAL_USER}@gmail.com" \
- && git config --global user.name  "${LOCAL_USER}"
+RUN git config --system credential.useHttpPath true \
+ && git config --system user.email "${LOCAL_USER}@gmail.com" \
+ && git config --system user.name  "${LOCAL_USER}"
 
 # Setup Databricks config file path
 ENV DATABRICKS_CONFIG_FILE="/app/.databrickscfg"
