@@ -18,14 +18,14 @@
                 "databricks.databricks",
                 "tamasfe.even-better-toml",
                 "bierner.markdown-mermaid",
-                "paiqo.databricks-vscode",
-                "ms-python.pylint"
+                "paiqo.databricks-vscode"
             ],
             "settings": {
-                "pylint.args":["--rcfile=pylintrc"],
                 "terminal.integrated.defaultProfile.linux": "bash"
             }
-        },
-        "postCreateCommand": "sh post_create.sh"
-    }
+        }
+    },
+
+   "postCreateCommand": "chmod +x .devcontainer/post_create.sh",
+    "postStartCommand": "./.devcontainer/post_create.sh"
 }
