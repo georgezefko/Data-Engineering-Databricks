@@ -1,0 +1,10 @@
+.venv/
+.databricks/
+.vscode/
+build/
+dist/
+__pycache__/
+*.egg-info
+scratch/**
+.ruff_cache/
+.env
