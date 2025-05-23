@@ -19,13 +19,14 @@
                 "tamasfe.even-better-toml",
                 "bierner.markdown-mermaid",
                 "paiqo.databricks-vscode",
-                "ms-python.pylint"
+                "charliermarsh.ruff"
             ],
             "settings": {
-                "pylint.args":["--rcfile=pylintrc"],
+                "python.linting.ruffEnabled": true,
+                "python.linting.pylintEnabled": false,
                 "terminal.integrated.defaultProfile.linux": "bash"
             }
         },
-        "postCreateCommand": "sh post_create.sh"
+        "postCreateCommand": "bash post_create.sh"
     }
 }
