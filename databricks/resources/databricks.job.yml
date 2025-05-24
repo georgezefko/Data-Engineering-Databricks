@@ -1,4 +1,4 @@
-# The main job for databricks.
+# The main job for databricks. Dummy comment for demonstation
 resources:
   jobs:
     databricks_job:
