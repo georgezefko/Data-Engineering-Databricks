@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/devcontainers/base:jammy
 
 
-ARG LOCAL_USER=vscode
+ARG LOCAL_USER
 
 
 
