@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/georgezefko/Data-Engineering-Databricks/compare/v1.1.1...v1.2.0) (2025-05-24)
+
+
+### Features
+
+* **pipelines:** added dummy pipeline for demonstration ([2cf769e](https://github.com/georgezefko/Data-Engineering-Databricks/commit/2cf769e88eb1103080e4b1e3b492db9058c51e82))
+
 ## [1.1.1](https://github.com/georgezefko/Data-Engineering-Databricks/compare/v1.1.0...v1.1.1) (2025-05-21)
 
 
