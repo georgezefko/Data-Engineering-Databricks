@@ -14,6 +14,6 @@ Tutorials - Projects
 
 **1. Modernizing Databricks: Setting Up a Local Dev Environment with Dev Containers and Asset Bundles.**
 
-In the first tutorial/project, I guide you through setting up the local development environment using databricks asset bundles and devcontainers. Then you will be able to build you code in VScode and run it or test it in Databricks.
+In the first tutorial/project, I guide you through setting up the local development environment using databricks asset bundles and devcontainers. Then you will be able to build your code in VScode and run it or test it in Databricks.
 
 You can find the relevant article with a detailed guide here: [Medium blog](https://medium.com/data-engineer-things/modernizing-databricks-setting-up-a-local-dev-environment-with-dev-containers-and-asset-bundles-8385b945be8c)
