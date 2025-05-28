@@ -4,11 +4,11 @@ This repository aims to demonstrate how to use Databricks for your data engineer
 
 Repository structure
 
-.devcontainer: This directory contains all the files and scripts necessary to set up the local dev environment and interact with Databricks from VScode.
+**.devcontainer**: This directory contains all the files and scripts necessary to set up the local dev environment and interact with Databricks from VScode.
 
-databricks: This is our Asset Bundle where our code, pipelines, workflows and job definitions live.
+**databricks**: This is our Asset Bundle where our code, pipelines, workflows and job definitions live.
 
-To get full understanding of how to build the repository from scratch you can check the turotial here or you can simply clone the repo and start from there.
+To get full understanding of how to build the repository from scratch you can check the **turotial 1** or you can simply clone the repo and start from there.
 
 Tutorials - Projects
 
