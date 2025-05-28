@@ -12,7 +12,7 @@ To get full understanding of how to build the repository from scratch you can ch
 
 Tutorials - Projects
 
-1. Modernizing Databricks: Setting Up a Local Dev Environment with Dev Containers and Asset Bundles.
+**1. Modernizing Databricks: Setting Up a Local Dev Environment with Dev Containers and Asset Bundles.**
 
 In the first tutorial/project, I guide you through setting up the local development environment using databricks asset bundles and devcontainers. Then you will be able to build you code in VScode and run it or test it in Databricks.
 
