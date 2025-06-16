@@ -17,3 +17,9 @@ Tutorials - Projects
 In the first tutorial/project, I guide you through setting up the local development environment using databricks asset bundles and devcontainers. Then you will be able to build your code in VScode and run it or test it in Databricks.
 
 You can find the relevant article with a detailed guide here: [Medium blog](https://medium.com/data-engineer-things/modernizing-databricks-setting-up-a-local-dev-environment-with-dev-containers-and-asset-bundles-8385b945be8c)
+
+**2. Automating Databricks Deployments: CI/CD with Asset Bundles and Semantic Release.**
+
+In the second tutorial/project, I guide you through on how to set up your CI/CD pipelines to deploy your code using Asset Bundles and Semantic Release for proper versioning
+
+You can find the relevant article with a detailed guide here: [Medium blog](https://medium.com/data-engineer-things/automating-databricks-deployments-ci-cd-with-asset-bundles-and-semantic-release-23cfbf8bf582)
